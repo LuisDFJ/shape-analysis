@@ -1,0 +1,36 @@
+\textbf{Problem 1} - Variational calculus.
+
+\textit{a)} Let $\gamma : [0,1] \to \mathbb{R}^2$, and $\mathbf{v} : [0,1] \to \mathbb{R}^2$
+be a vector field along $\gamma$. Let the arc lenght of $\gamma$ be:
+$$
+    s[\gamma] = \int_0^1 \|\gamma'(t)\|_2 dt
+$$
+Compute $ds_\gamma[\v]$:
+$$
+\begin{aligned}
+    ds_\gamma[\v] &= \left. \frac{d}{dh} s[\gamma + h\v] \right|_{h=0}\\
+    &= \left. \int_0^1 \frac{d}{dh} \|\gamma' + h\v'\|_2\ dt \right|_{h=0}\\
+    &= \left. \int_0^1 \frac{(\gamma' +h\v)\cdot\v}{\|\gamma' + h\v'\|_2}\ dt \right|_{h=0}\\
+    &= \int_0^1 \frac{\gamma'\cdot\v}{\|\gamma'\|_2}\ dt\\
+    &= \int_0^1 T \cdot \v \ dt\\
+    &= [T\cdot\v]_0^1 - \int_0^1 T' \cdot \v \ dt\\
+\end{aligned}
+$$
+
+\textit{b)} Suppose $\v(0) = \v(1) = 0$. Define a vector valued function $\w(s)$ so that
+$$
+    ds_\gamma[\v] = \int_0^{s(1)} \v(s^{-1}(\bar{s}))\cdot\w(\bar{s})\ d\bar{s}
+$$
+
+Let $\bar{s} = s(t)$ and $t = s^{-1}(\bar{s})$.
+$$
+\begin{aligned}
+    ds_\gamma[\v] &= -\int_{0}^{1} \v(t)\cdot T'(t)\ dt\\ 
+    &= -\int_{0}^{s(1)} \v(t)\cdot \frac{dT}{ds}  \ d\bar{s}\\ 
+\end{aligned}
+$$
+
+Finally, let $\frac{dT}{ds} = \kappa(\bar{s})N(\bar{s})$, thus
+$$
+\w = - \kappa(\bar{s})N(\bar{s})
+$$

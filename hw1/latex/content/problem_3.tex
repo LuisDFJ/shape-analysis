@@ -1,0 +1,97 @@
+\textbf{Problem 3} - Discrete elastic rod.
+
+\textit{b)} The bending energy has the form
+$$
+    E_{\text{bend}} = \alpha \sum_i \frac{(\kappa\b)_i}{\bar{l}_i}
+$$
+the bending force is thus
+$$
+    -\nabla_iE_{\text{bend}} = - \sum_j \frac{2\alpha}{\bar{l}_j} \nabla_i(\kappa\b)_j \cdot (\kappa\b)_j
+$$
+
+Derive an expression for $\nabla_i (\kappa\b)_j$:
+$$
+\begin{aligned}
+    (\kappa\b)_j &= \frac{2[\e^{j-1}]\e^j}{|\e^{j-1}||\e^j| + \e^{j-1}\cdot\e^j} \\
+    &= \frac{2 a\times b}{|a||b| + a\cdot b}\\
+\end{aligned}
+$$
+Let's compute $\delta (\kappa \b)_j$,
+$$
+\begin{aligned}
+    D &= |a||b| + a\cdot b\\
+    \delta K &= 2\frac{ \delta( a \times b )D - (a\times b)\delta D }{ D^2 }\\
+    \delta K &= 2\frac{ ( \delta a \times b + a \times \delta b )D - (a\times b)\delta D }{ D^2 }\\
+    \delta D &= \delta|a||b| + |a|\delta|b| + \delta a \cdot b + a \cdot \delta b\\
+    &= \frac{|b|}{|a|}(a\cdot\delta a) + \frac{|a|}{|b|}(b\cdot\delta b ) + \delta a \cdot b + a \cdot \delta b\\
+    \delta K &= 2 \frac{\delta a\times b + a \times\delta b}{D} -
+    2\frac{a \times b}{D^2}\left(
+    \frac{|b|}{|a|}(a\cdot\delta a)
+    + \frac{|a|}{|b|}(b\cdot\delta b )
+    + \delta a \cdot b + a \cdot \delta b
+    \right)\\
+\end{aligned}
+$$
+
+From here, we have three scenarios considering that,
+$$
+\begin{aligned}
+    a &= \e^{j-1} &= \x_j - \x_{j-i} \\
+    b &= \e^{j} &= \x_{j+1} - \x_{j} \\
+\end{aligned}
+$$
+
+For $i=j-1$
+$$
+    \delta a = -\delta\x_{j-i} \qquad \delta b = 0    
+$$
+$$
+\begin{aligned}
+    \delta K &= 2 \frac{\delta a\times b}{D} -
+    2\frac{a \times b}{D^2}
+    \left(
+        \frac{|b|}{|a|}(a\cdot\delta a)
+        + b \cdot \delta a
+    \right)\\
+    &= 2 \frac{[b]\delta\x_{j-1}}{D} +
+    2\frac{a \times b}{D^2}
+    \left(\frac{|b|}{|a|}a^T + b^T \right)\delta\x_{j-i}\\
+    \nabla_i K &= 2 \frac{[b]}{D} +
+    2\frac{a \times b}{D^2}
+    \left(\frac{|b|}{|a|}a^T + b^T \right)\\
+    &=\frac{
+        2[\e^j] + 
+        (\kappa\b)_j (\e^j)^T
+    }{
+        |\e^{j-1}||\e^j| + \e^{j-1}\cdot\e^j
+    }
+\end{aligned}
+$$
+
+similarly for for $i=j$
+$$
+    \delta a = \delta\x_{j} \qquad \delta b = -\delta\x_{j}    
+$$
+$$
+    \nabla_i K = 
+    -\frac{
+        2[\e^{j-1}] + 2[\e^{j}] + 
+        (\kappa\b)_j (\e^{j})^T -
+        (\kappa\b)_j (\e^{j-1})^T
+    }{
+        |\e^{j-1}||\e^j| + \e^{j-1}\cdot\e^j
+    }
+$$
+and for $i=j+1$
+$$
+    \delta a = 0 \qquad \delta b = \delta\x_{j+1}    
+$$
+$$
+    \nabla_i K = 
+    \frac{
+        2[\e^{j-1}] - 
+        (\kappa\b)_j (\e^{j-1})^T
+    }{
+        |\e^{j-1}||\e^j| + \e^{j-1}\cdot\e^j
+    }
+$$

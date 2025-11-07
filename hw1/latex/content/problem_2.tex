@@ -1,0 +1,49 @@
+\textbf{Problem 2} - Discrete curvature of a plane curve.
+
+\textit{a)} Suppose we have a discrete curve given by $\{ \x_i \in \mathbb{R}^2 \}$ for $i = 1,\dots, n$.
+Define an arc length functional $s(\x) : \mathbb{R}^{2n} \to \mathbb{R}_+$.
+
+$$
+\begin{aligned}
+    s(\x) = \sum_{i=1}^{n-1} \|\x_{i+1} - \x_{i}\|_2
+\end{aligned}
+$$
+
+\textit{b)} Suppose $1< i < n$. Write an expression for $\nabla_{\x_i} s$ and show that
+its norm is $2\sin \frac{\theta}{2}$, with $\theta$ being the turning angle.
+
+$$
+\begin{aligned}
+    s(\x) &= \cdots + \|\x_i - \x_{i - 1}\|_2 + \| \x_{i+1} - \x_i \|_2 + \cdots\\
+    \nabla_{\x_j} s(\x) 
+    &= \frac{\x_{i} - \x_{i-1}}{\|\x_{i} - \x_{i-1}\|_2}
+    -\frac{\x_{i+1} - \x_i}{\|\x_{i+1} - \x_i\|_2}\\
+    &= \t_i - \t_{i+1}
+\end{aligned}
+$$
+
+also,
+$$
+\begin{aligned}
+    \|\nabla_{\x_j} s(\x)\|_2^2 &= (\t_i - \t_{i+1}) \cdot (\t_i - \t_{i+1}) \\ 
+    &= \|\t_i\|_2^2 + \|\t_{i+1}\|_2^2 - 2\t_i\cdot\t_{i+1} \\
+    &= 2 - 2\cos \theta_i\\
+    &= 4 \sin^2 \frac{\theta_i}{2} 
+\end{aligned}
+$$
+finally,
+$$
+    \|\nabla_{\x_j} s(\x)\|_2  = 2 \sin \frac{\theta_i}{2} 
+$$
+
+\textit{d)} Propose a measure of discrete per-vertex curvature of a 2D discrete curve.
+$$
+\begin{aligned}
+    ds_\gamma[\v] &= \left< \w, \v \right>_{L_2} \\
+    ds_{\x}[\x_j] &= \left< \nabla_{\x_j}s(\x), \x_j \right>_2 \\
+    \| \w \|_2 &= \|-\kappa(\bar{s})N(\bar{s})\|_2 \\
+    &= |\kappa(\bar{s})| \\
+    &\approx \|\nabla_{\x_j} s(\x)\|_2 \\
+    |\kappa| &\approx 2\sin \frac{\theta}{2}
+\end{aligned}
+$$

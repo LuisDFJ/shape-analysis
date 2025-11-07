@@ -171,20 +171,20 @@ end
 ### PROBLEM 3(c) Part I - YOUR CODE HERE
 function computeBendForce(curveData)
     bendForce = zeros(size(curveData.verts));
-    for i = 1 : curveData.nv
-        eⱼ  = curveData.edgesR[:,i]
-        e₋  = curveData.edgesL[:,i] 
-        kⱼ  = curveData.curvatureBinormals[:,i]
-        k₋  = curveData.curvatureBinormals[:,mod1(i-1,curveData.nv)]
-        k₊  = curveData.curvatureBinormals[:,mod1(i+1,curveData.nv)]
-        lⱼ  = curveData.dualLengths[i]
-        l₋  = curveData.dualLengths[mod1(i-1,curveData.nv)]
-        l₊  = curveData.dualLengths[mod1(i+1,curveData.nv)]
-        D   = norm(e₋)*norm(eⱼ) + dot( e₋, eⱼ )
-        ∇K₋ = ( 2 * skew( eⱼ ) + kⱼ .* eⱼ' ) / D
-        ∇K₊ = ( 2 * skew( e₋ ) - kⱼ .* e₋' ) / D
-        ∇Kⱼ = -( 2 * skew( e₋ + eⱼ ) + kⱼ .* ( eⱼ - e₋ )' ) / D
-        bendForce[:,i] = - ( ∇K₋' * k₋ / l₋ + ∇Kⱼ' * kⱼ / lⱼ + ∇K₊' * k₊ / l₊ )
+    n = curveData.nv
+    for i = 1 : n
+        e  = curveData.edgesR[:,i]
+        e₋ = curveData.edgesL[:,i] 
+        k  = curveData.curvatureBinormals[:,i]
+        l  = curveData.dualLengths[i]
+        D  = norm(e₋)*norm(e) + dot( e₋, e )
+        ∇K₋ = ( 2 * skew( e  ) + k .* e' ) / D
+        ∇K₊ = ( 2 * skew( e₋ ) - k .* e₋' ) / D
+        ∇K  = -( ∇K₊ + ∇K₋ )
+
+        bendForce[:,mod1(i-1,n)] += -∇K₋' * k / l
+        bendForce[:,i]   += -∇K' * k / l
+        bendForce[:,mod1(i+1,n)] += -∇K₊' * k / l
     end
     return bendForce
 end
@@ -193,18 +193,20 @@ end
 ### PROBLEM 3(c) Part II - YOUR CODE HERE
 function computeTwistForce(curveData)
     twistForce = zeros(size(curveData.verts));
-    for i = 1 : curveData.nv
-        ∇ψᵢ = zeros( 3 )
-        for j = i - 1 : i + 1
-            J = mod1( j, curveData.nv )
-            eⱼ  = curveData.edgesR[:,J]
-            e₋  = curveData.edgesL[:,J] 
-            kⱼ  = curveData.curvatureBinormals[:,J]
-            ∇ψ₋ =  kⱼ / (2*norm(e₋))
-            ∇ψ₊ = -kⱼ / (2*norm(eⱼ))
-            ∇ψᵢ += -( ∇ψ₋ + ∇ψ₊ )
-        end
-        twistForce[:,i] = curveData.totalTwist * ∇ψᵢ / curveData.totalLength
+    n = curveData.nv
+    for i = 1 : n
+        e  = curveData.edgesR[:,i]
+        e₋ = curveData.edgesL[:,i] 
+        k  = curveData.curvatureBinormals[:,i]
+        ∇ψ₋ =  k / ( 2 * norm(e₋) )
+        ∇ψ₊ = -k / ( 2 * norm(e) )
+        ∇ψ  = -( ∇ψ₊ + ∇ψ₋ )
+
+        C = curveData.totalTwist / curveData.totalLength
+
+        twistForce[:,mod1(i-1,n)] += -C * ∇ψ₋
+        twistForce[:,i]   += -C * ∇ψ
+        twistForce[:,mod1(i+1,n)] += -C * ∇ψ₊
     end
     return twistForce
 end

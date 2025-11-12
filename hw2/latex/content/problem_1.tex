@@ -1,0 +1,67 @@
+\textbf{Problem 1} - Recall the Taubin matrix for approximating mesh curvature
+$$
+    M_\p = \frac{1}{2\pi} \int_{-\pi}^\pi \kappa_\theta\t_\theta\t_\theta^T\ d\theta
+$$
+
+\textit{a)} Prove that $\n, \t_\text{min}, \t_\text{max}$ are eigenvectors of $M_\p$.
+
+Let $\t_\theta = \cos{\theta}\ \tm + \sin{\theta}\ \tM$, where $\|\tt\|_2 = 1$ and the principal
+directions of $T_\p(\mathcal{M})$ are $\tm, \tM$. We can prove that, with the first and second
+fundamental forms and the shape operators $\I(\t_1, \t_2), \II(\t_1,\t_2), S(\t) = - d\n_\p(\t)$
+
+$$
+\begin{aligned}
+    \II( \tt, \tt ) &= \kappa_\theta\\ 
+    &= \I(S(\tt), \tt)\\
+    &= \I(\cos{\theta}\ S(\tm) + \sin{\theta}\ S(\tM), \tt)\\
+    &= \cos{\theta}\ \I( S(\tm), \tt ) + \sin{\theta}\ \I( S(\tM), \tt)\\
+    &= \cos{\theta}\ \I( S(\tm), \tt ) + \sin{\theta}\ \I( S(\tM), \tt)\\
+\end{aligned}
+$$
+
+Remember that for $S:T_\p(\M) \to T_\p(\M)$, $S(\tm) = \km \tm$ and $S(\tM) = \kM \tM$.
+Also, $\I(\t_i,\t_j) = \delta_{i,j}$, thus,
+
+$$
+\begin{aligned}
+    \I(S(\tm),\tt) &= \I( \km \tm, \cos{\theta}\ \tm + \sin{\theta}\ \tM )\\
+    &= \km \cos{\theta}\ \I( \tm, \tm ) + \sin{\theta}\ I(\tm,\tM )\\
+    &= \km \cos{\theta}\\
+    \I(S(\tM),\tt) &= \kM \sin{\theta}\\
+\end{aligned}
+$$
+
+Finally,
+$$
+\boxed{
+    \kappa_\theta = \km \cos^2\theta + \kM \sin^2\theta
+}
+$$
+
+Now, let's expand $M_\p$ as
+$$
+\begin{aligned}
+    M_\p &= \frac{1}{2\pi}\int_{-\pi}^\pi \kappa_\theta
+    (\tm \cos \theta + \tM \sin \theta)
+    (\tm \cos \theta + \tM \sin \theta)^T\ d\theta\\
+    &= \frac{1}{2\pi}\int_{-\pi}^\pi \kappa_\theta \cos^2\theta\ d\theta \tm\tm^T\\
+    &+ \frac{1}{2\pi}\int_{-\pi}^\pi \kappa_\theta \cos\theta\sin\theta\ d\theta (\tm\tM^T + \tM\tm^T)\\
+    &+ \frac{1}{2\pi}\int_{-\pi}^\pi \kappa_\theta \sin^2\theta\ d\theta \tM\tM^T\\
+    &= \frac{1}{2\pi}\int_{-\pi}^\pi \km \cos^4\theta + \kM \sin^2\theta\cos^2\theta\ d\theta \tm\tm^T\\
+    &+ \frac{1}{2\pi}\int_{-\pi}^\pi \km \cos^3\theta\sin\theta + \kM \cos\theta\sin^3\theta\ d\theta (\tm\tM^T + \tM\tm^T)\\
+    &+ \frac{1}{2\pi}\int_{-\pi}^\pi \km \cos^2\theta\sin^2\theta + \kM\sin^4\theta\ d\theta \tM\tM^T\\
+    &= \left(\frac{3}{8}\km + \frac{1}{8}\kM\right) \tm\tm^T\\
+    &+ 0(\tm\tM^T + \tM\tm^T)\\
+    &+ \left(\frac{1}{8}\km + \frac{3}{8}\kM\right) \tM\tM^T\\
+    &= \boxed{ \left(\frac{3}{8}\km + \frac{1}{8}\kM\right) \tm\tm^T
+    + \left(\frac{1}{8}\km + \frac{3}{8}\kM\right) \tM\tM^T }\\
+\end{aligned}
+$$
+
+Thus $M_\p \tm = \left(\frac{3}{8}\km + \frac{1}{8}\kM\right)\tm$
+and $M_\p \tM = \left(\frac{1}{8}\km + \frac{3}{8}\kM\right)\tM$
+by orthogonality of $\tm$ and $\tM$. Also, for $\n$ which is normal to any $\tt$, we have
+$\n \cdot \tm = 0$ and $\n \cdot \tM = 0$, thus $M_\p \n = 0 \n$.
+
+
+

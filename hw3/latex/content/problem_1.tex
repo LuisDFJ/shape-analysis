@@ -1,6 +1,6 @@
 Let $\gamma : [0,L] \to \M$ be an arc lenght-parametrized curve on an orientable surface $\M \subset \mathbb{R}^3$. Let $\v$ be a tangent vector field defined along the curve, i.e., $\v(s) \in T_{\gamma(s)}\M$. If,
 $$
-    \underset{T_{\gamma(s)}\M}{\text{proj}} \v'(s) = \v(s) - \n(\gamma(s))\n(\gamma(s))\cdot\v'(s) = 0
+    \underset{T_{\gamma(s)}\M}{\text{proj}} \v'(s) = \v'(s) - \n(\gamma(s))\n(\gamma(s))\cdot\v'(s) = 0
 $$
 then we say that $\v$ is parallel.
 
@@ -15,3 +15,54 @@ $$
 Its tangent vector field is $T(s) = \varphi'(s)$. For $T(s)$ to be parallel it requires to $\text{proj} T'(s) = 0$, since $T'(s) = \varphi''(s)$ the proof is complete.
 
 \textit{b)} Suppose $\u$ and $\v$ are parallel fields along $\gamma$. Show that $\u\cdot\v$ and $\|\u\|_2$ are constant.
+
+\textbf{Proof} - Let
+$$
+    \underset{T_{\gamma(s)}\M}{\text{proj}} \u' = 0 \qquad
+    \underset{T_{\gamma(s)}\M}{\text{proj}} \v' = 0 
+$$
+Let $\u \cdot \v = c$ iff $\u'\cdot\v + \u\cdot\v' = 0$, let's prove the later. Since $\u \in T_\gamma\M$ and $\u' \perp T_\gamma\M$ (similarly for $\v$), we have
+$$
+    \u' \cdot \v + \u \cdot \v' = \cancelto{0}{\u'\cdot \v} + \cancelto{0}{\u\cdot\v'} = 0
+$$
+
+\textbf{Note}: Equation 1 is a first-order ODE whose solution is unique given an initial condition $\v(0)$. We can define the parallel transport operator $P_\gamma$ by $P_\gamma \v(0) = \v(L)$, where $\v$ is the unique parallel field along $\gamma$ with initial condition $\v(0)$.
+
+\textit{c)} Use the result from \textit{b)} to argue that parallel transport around a closed loop (known as holonomy) amounts to a rotation in the tangent plane.
+
+\textbf{Proof} - Let a closed curve $\gamma : [0,L] \to \M$ such that $\gamma(0) = \gamma(L) = p$. Given a vector $\u_0 \in T_p\M$ its parallel transport is:
+$$
+    P_\gamma \u_0 = \u_L
+$$
+And thus, both $\u_0, \u_L \in T_p\M$. Thus, since $\u_0 \cdot \u_L \equiv c$ and $\|\u_0\|_2 = \|\u_1\|_2$.
+
+\textit{d)} Let $\v$ be parallel along $\gamma$. Let $\theta(s)$ be the angle from $\gamma'(s)$ to $\v(s)$, measured counterclockwise about the surface normal $\n$. Show that,
+
+$$
+    \theta'(s) = - \kappa_g
+$$
+
+where $\kappa_g$ is the geodesic curvature of $\gamma$, defined by projection of the second derivative of $\gamma$ into the tangent plane of the surface:
+$$
+    \underset{T_\gamma\M}{\text{proj}} \gamma''(s) = \kappa_g( \n \times \gamma'(s) )
+$$
+\textbf{Proof} - Let $\gamma(s)$ be parameterized by arc length and $\gamma'(s), \v(s) \in T_{\gamma(s)}\M$ with $\v'(s) \perp T_{\gamma(s)}\M$, then we can represent $\v$ in terms of the orthonormal basis of $T_\gamma\M$, $(\gamma', \n \times\gamma')$, with $\|\gamma'\|_2 = 1$, then
+$$
+    \v(s) = \alpha \cos{\theta(s)} \gamma'(s) + \alpha \sin{\theta(s)} \n(s) \times \gamma'(s)
+$$
+
+Let's differentiate $\gamma'(s) \cdot \v(s) = \|\v\|_2\cos{\theta(s)}$,
+$$
+    \gamma''(s) \cdot \v(s) + \gamma'(s) \cdot \v'(s) = -\alpha\theta'(s)\sin{\theta(s)}
+$$
+Since $\v' \perp T_\gamma\M$ and $\gamma' \in T_\gamma\M$,
+$$
+\begin{aligned}
+    \gamma''(s) \cdot \v(s) &= -\alpha\theta'\sin{\theta}\\
+    \underset{T_\gamma\M}{\text{proj}} \gamma''(s) \cdot \v(s) &= \\
+    \kappa_g(\n\times\gamma') \cdot \v(s) &= \\
+    \kappa_g(\n\times\gamma') \cdot \alpha (\cos\theta \gamma' + \sin\theta \n\times\gamma') &= \\
+    \alpha\kappa_g \sin\theta &= -\alpha\theta'\sin{\theta}\\
+    \kappa_g &= -\theta' 
+\end{aligned}
+$$

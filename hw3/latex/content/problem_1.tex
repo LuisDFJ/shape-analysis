@@ -1,0 +1,17 @@
+Let $\gamma : [0,L] \to \M$ be an arc lenght-parametrized curve on an orientable surface $\M \subset \mathbb{R}^3$. Let $\v$ be a tangent vector field defined along the curve, i.e., $\v(s) \in T_{\gamma(s)}\M$. If,
+$$
+    \underset{T_{\gamma(s)}\M}{\text{proj}} \v'(s) = \v(s) - \n(\gamma(s))\n(\gamma(s))\cdot\v'(s) = 0
+$$
+then we say that $\v$ is parallel.
+
+\textit{a)} Show that the unit tangent vector field of a geodesic is parallel.
+
+\textbf{Proof} - Let $\varphi : [0,1] \to \M$ be a geodesic parameterized by arc length, then
+
+$$
+\underset{T_{\varphi(s)}\M}{\text{proj}} \varphi''(s) = 0
+$$
+
+Its tangent vector field is $T(s) = \varphi'(s)$. For $T(s)$ to be parallel it requires to $\text{proj} T'(s) = 0$, since $T'(s) = \varphi''(s)$ the proof is complete.
+
+\textit{b)} Suppose $\u$ and $\v$ are parallel fields along $\gamma$. Show that $\u\cdot\v$ and $\|\u\|_2$ are constant.

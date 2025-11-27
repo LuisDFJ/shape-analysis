@@ -34,7 +34,11 @@ $$
 $$
     P_\gamma \u_0 = \u_L
 $$
-And thus, both $\u_0, \u_L \in T_p\M$. Thus, since $\u_0 \cdot \u_L \equiv c$ and $\|\u_0\|_2 = \|\u_1\|_2$.
+And thus, both $\u_0, \u_L \in T_p\M$. Thus, since for any $\v \cdot \u \equiv c$, i.e., the angle is preserved, and the alternatively write the dot product as,
+$$
+    (P_\gamma \u)\cdot (P_\gamma \v) = \u \cdot \v
+$$
+Where $P_\gamma \in SO(2)$ serves as rotation of degree two along $\n(\gamma(0))$.
 
 \textit{d)} Let $\v$ be parallel along $\gamma$. Let $\theta(s)$ be the angle from $\gamma'(s)$ to $\v(s)$, measured counterclockwise about the surface normal $\n$. Show that,
 
@@ -66,3 +70,15 @@ $$
     \kappa_g &= -\theta' 
 \end{aligned}
 $$
+
+\textit{e)} A geodesic polygon is a polygon formed from geodesic segments. Show that parallel transporting a vector around a geodesic polygon rotates it by the angle $\sum(\pi - \alpha_i)$, where $\alpha_i$ are the interior angles of the polygon.
+
+\textbf{Proof} - Let a geodesic polygon be described by $\{\gamma_i : [0,L_i] \to \M \}_i^N$, such that $\gamma_i(L_i) = \gamma_{i+1}(0)$ for $i=1,\dots,N-1$, and $\gamma_N(L_N) = \gamma_1(0)$. Thus, we can measure their exterior angles between $\gamma_i$ and $\gamma_{i+1}$ as the exterior angle ($\beta_i$) between their tangent vectors,
+$$
+    \cos \beta_i = \gamma_i'(L_i) \cdot \gamma_{i+1}'(0), \qquad i = 1,\dots,N-1
+$$
+since $\v_i = \gamma_i'$ is parallel we have
+$$
+    c_i = \v_i \cdot \v_{i+1}
+$$
+Let transport $\u(0) \in T_{\gamma_1(0)}\M$, $P_{\gamma_1} \u(0) = \u(L_1)$, $\u(s) \cdot \v_1(s)$ is constant along $\gamma_1$. Since $\v_1 \cdot \v_2 = \cos \beta_1$ we have $\u(L_1 + L_2) \cdot \v_2(L_2) = \cos (\beta_1 + \beta_2)$. Following this argument, after $P_\gamma = P_{\gamma_1} \circ P_{\gamma_2} \circ \cdots \circ P_{\gamma_N}$ we have a total rotation of $\sum \beta_i$ of exterior angles. Corresponding to $\sum(\pi - \alpha_i)$ in interior angles.

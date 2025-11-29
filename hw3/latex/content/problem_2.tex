@@ -56,3 +56,65 @@ $$
 $$
 
 Since $m = \Theta(\log^2 n)$, then $\rho = O(\log{n})$.
+
+\textit{b)} The map $f$ can be built up from the distances themselves. Show that if $S_i$ is any nonempty subset of $X$ and
+$$
+    f_i(x) := d(x,S_i) := \min_{y\in S_i} d(x,y),
+$$
+then $|f_i(x) - f_i(y)| \leq d(x,y)$ holds.
+
+\textbf{Proof} - Let $x, y \in X$, and $S \subseteq X$ with $S\neq \emptyset$ and $z \in S$. Also let $f(x) := \min_{z\in S} d(x,z)$. Then, using the triangle inequality we have,
+$$
+\begin{aligned}
+    d(x,z) &\leq d(x,y) + d(y,z)\\
+    f(x) := \min_{z\in S} d(x,z) &\leq d(x,y) + \min_{z\in S} d(y,z)\\
+    f(x) &\leq d(x,y) + f(y)\\
+    f(x) - f(y) &\leq d(x,y)\\
+\end{aligned}
+$$
+
+Similarly, we can prove $f(y) - f(x) \leq d(x,y)$, thus
+$$
+    |f(x) - f(y)| \leq d(x,y) \qquad \text{for} \ f(s) := d(x,S)
+$$
+
+\textit{c)} The construction of the sets $S_i$ and the proof of $\|f(x) - f(y)\|_1 \in \Omega( \log{n}\ d(x,y) )$, rely on a probabilistic argument. The basic idea is to sample enough subsets $S_i$ to separate any given pair of points $x$ and $y$.
+Suppose a subset $S\subset X$ is sampled as $\mathbb{P}(x \in S) = 1/k$ independently for each $x \in X$, where $k \geq 2$. Let $B$ be a fixed subset of $X$. Show that
+$$
+\begin{aligned}
+    |B| &\geq \alpha k \Longrightarrow \mathbb{P}(B\cap S \neq \emptyset ) \geq 1 - e^{-\alpha} > 0\\ 
+    |B| &\leq \alpha k \Longrightarrow \mathbb{P}(B\cap S = \emptyset ) \geq 4^{-\alpha} > 0\\ 
+\end{aligned}
+$$
+
+\textbf{Proof} - Each element in $S$ is included independently, with probability $1/k$ the probability that $x \in S \land x \notin B$ is
+$$
+    \mathbb{P}(B \cap S = \emptyset) = \left( 1 - \frac{1}{k} \right)^{|B|}
+$$
+whereas the probability that $x \in S \land x \in B$
+$$
+    \mathbb{P}(B \cap S \neq \emptyset) = 1 - \left( 1 - \frac{1}{k} \right)^{|B|}
+$$
+First, we can assume that if $|B| \geq \alpha k$,
+$$
+    \left( 1 - \frac{1}{k} \right)^{|B|} \leq
+    \left( 1 - \frac{1}{k} \right)^{\alpha k} \leq
+    e^{-\alpha}
+$$
+using the $e^{\alpha}$ definition. Thus,
+$$
+    \mathbb{P}(B \cap S \neq \emptyset) = 1 - \left( 1 - \frac{1}{k} \right)^{|B|} \geq 1 - e^{-\alpha} > 0
+$$
+Second, if $|B| \leq \alpha k$ then
+$$
+    \mathbb{P}(B \cap S = \emptyset) = \left( 1 - \frac{1}{k} \right)^{|B|} \geq 
+    \left( 1 - \frac{1}{k} \right)^{\alpha k}
+$$
+For $k \geq 2$,
+$$
+    \left( 1 - \frac{1}{k} \right)^k \geq \left( 1 - \frac{1}{2} \right)^2 = \frac{1}{4}
+$$
+and finally,
+$$
+    \mathbb{P}(B \cap S = \emptyset) \geq 4^{-\alpha}
+$$

@@ -103,7 +103,7 @@ $$
 $$
 using the $e^{\alpha}$ definition. Thus,
 $$
-    \mathbb{P}(B \cap S \neq \emptyset) = 1 - \left( 1 - \frac{1}{k} \right)^{|B|} \geq 1 - e^{-\alpha} > 0
+    \boxed{ \mathbb{P}(B \cap S \neq \emptyset) = 1 - \left( 1 - \frac{1}{k} \right)^{|B|} \geq 1 - e^{-\alpha} > 0 }
 $$
 Second, if $|B| \leq \alpha k$ then
 $$
@@ -116,5 +116,39 @@ $$
 $$
 and finally,
 $$
-    \mathbb{P}(B \cap S = \emptyset) \geq 4^{-\alpha}
+    \boxed{ \mathbb{P}(B \cap S = \emptyset) \geq 4^{-\alpha} }
 $$
+
+\textit{d)} For each $i \in \{ 1, \dots, \log_2\ n \}$, sample a subset $S_i$ as follows: $\mathbb{P}(x \in S_i) = 2^{-i}$ independently for each $x \in X$. Defining $f_i(x) = d(x,S_i)$ as above, show that for a fixed pair $x,y \in X$,
+$$
+    \mathbb{E}\left[ \sum_i |f_i(x) - f_i(y) | \right] \in \Omega(d(x,y)),
+$$
+where the expectation is taken over the sets $S_i$.
+
+\textbf{Proof} - Let $x,y \in X$ be fixed, thus $d(x,y)$ is fixed. $X$ can be covered by dyadic balls $B_x^{j} = \{ z \in X, d(x,z) < 2^{j} d(x,y) \}$, which double their radius. Being $n = |X|$, we can cover $X$ with at most a ball with $j = \log_2\ n$. We can also define disjoint annullar sets $A_x^j = B_x^j \setminus B_x^{j-1}$ with $A_x^0 = B_0^0$. Thus,
+$$
+    A_0 := \{ z \in X,\quad d(x,z) < d(x,y) \}
+$$
+and,
+$$
+    A_j := \{ z \in X,\quad 2^{j-1}d(x,y) \leq d(x,z) < 2^{j}d(x,y) \}
+$$
+
+Recall that $\forall z,w \in X, |f_i(z) - f_i(w)| \leq d(z,w)$, with $f_i(z) := d(z,S_i)$, with $S_i$ being a random sampling of $X$ with independent probability $2^-i$. Let's fix $j$ and look at the contribution to $|f_i(x) - f_i(y)|$ arising from points $z \in A_x^j$.
+
+\begin{itemize}
+    \item If $S_i \cap A_x^j \neq \emptyset$, then $f_i(x)$ is at most $2^jd(x,y)$. Also, if $S_i$ contains no element at a distance closer to $2^{j-1}$ from $y$, then
+    $$
+        |f_i(x) - f_i(y)| < 2^{j-1}d(x,y)
+    $$
+    because $f_i(x) \leq 2^r d(x,y)$ and $f_i(y) \geq 2^{j-1}d(x,y)$, with symmetry in $x,y$.
+\end{itemize}
+
+Let the size of $B_x^{j}$ and $B_y^{j}$ be the probabilities that $S_i$ hits one of $x,y$ but not the other. From previous problem, having $k = 2^i$,
+\begin{itemize}
+    \item If $|B_x^j| \geq \alpha \cdot 2^i$, and  $|B_y^j| \leq \alpha \cdot 2^i$,
+    $$
+        \mathbb{P}(S_i \cap B_x^j \neq \emptyset \land S_i \cap B_y^j = \emptyset ) \geq
+        (1 - e^{-\alpha})\cdot 4^{-\alpha}
+    $$
+\end{itemize}
